@@ -1,0 +1,78 @@
+Elastic Stack Setup and Nginx Log Analysis using Terraform
+Introduction
+
+The Elastic Stack (ELK Stack) is a set of open-source tools used for data ingestion, enrichment, storage, analysis, and visualization. 
+It consists of Elasticsearch (for storage and search), Logstash (for data processing and pipeline creation), and Kibana (for data visualization).
+Filebeat is used to ship logs from a source to Logstash or Elasticsearch. This document outlines the process of setting up the Elastic Stack 
+on AWS using Terraform, installing required services, and visualizing Nginx logs in Kibana.
+
+This assignment demonstrates the process of deploying the Elastic Stack "
+    "(Elasticsearch, Logstash, and Kibana) and configuring it to analyze logs "
+    "from an Nginx server. The aim is to showcase how Elastic Stack can be used "
+    "for log aggregation and visualization in a cloud environment using AWS EC2 instances.
+
+ The objective of this task is to implement a fully functional Elastic Stack on AWS "
+    to collect, parse, and visualize logs from an Nginx server. This includes:
+  Automating the deployment using Terraform.
+   Installing and configuring Elasticsearch, Logstash, and Kibana on one EC2 instance.
+   Installing and configuring Nginx and Filebeat on another EC2 instance.\n"
+ Visualizing logs from the Nginx server on Kibana."
+
+
+Why I Did This
+    The purpose of this assignment was to gain hands-on experience with the Elastic Stack, "
+    which is a widely used tool for centralized logging and data analysis. By automating the deployment process using Terraform, "
+  I aimed to enhance my skills in cloud infrastructure automation and log management."
+
+What I Achieved
+    By completing this assignment, I successfully:
+     Automated the creation of two EC2 instances using Terraform.
+    Installed and configured Elasticsearch, Logstash, and Kibana on one instance.
+    Installed and configured Nginx and Filebeat on the second instance.
+    Collected logs from the Nginx server and visualized them using Kibana.
+    Enhanced my understanding of Terraform, Elastic Stack, and cloud-based log management.
+
+
+Terraform Setup
+
+Terraform is used to create the necessary infrastructure on AWS. The following resources will be created in the AWS Default VPC:
+1. Two EC2 instances: one for the Elastic Stack and one for the Nginx server.
+2. Security groups for both instances to allow necessary ports.
+3. Key pairs for secure SSH access.
+
+Elastic Stack Server Setup
+
+Elasticsearch, Kibana, and Logstash are installed on the Elastic Stack server. The following steps are followed:
+1. Update the instance.
+2. Download and add the Elasticsearch GPG key.
+3. Add the Elasticsearch repository and install Elasticsearch.
+4. Install and configure Kibana.
+5. Install and configure Logstash.
+
+Commands Used
+•	sudo apt-get update
+→ Updates the list of available packages and their versions.
+•	wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+→ Downloads and adds the Elasticsearch GPG key for package verification.
+•	sudo apt-get install elasticsearch
+→ Installs Elasticsearch from the repository.
+•	sudo systemctl start elasticsearch.service
+→ Starts the Elasticsearch service.
+•	sudo sed -i 's/^#server.host: .*/server.host: "0.0.0.0"/' /etc/kibana/kibana.yml
+→ Configures Kibana to listen on all network interfaces.
+Nginx Server Setup
+
+On the Nginx server, the following are installed and configured:
+1. Nginx to serve web pages.
+2. Filebeat to ship Nginx logs to Elasticsearch via Logstash.
+The Nginx module in Filebeat is enabled to parse and send logs.
+
+Kibana Visualization
+
+Kibana is used to visualize logs from the Nginx server. Steps include:
+1. Access Kibana using the public IP of the Elastic Stack server on port 5601.
+2. Configure the Filebeat index pattern in Kibana.
+3. Visualize Nginx logs in the Discover tab.
+
+
+   
